@@ -49,7 +49,7 @@
 .profile__title {
   font-size: 42px;
   line-height: 48px;
-  font-weight: 500px;
+  font-weight: 500;
   grid-area: title;
   margin: 0 0 7px 0;
   text-overflow: ellipsis;
@@ -80,8 +80,13 @@
 
 @media screen and (max-width: 480px) {
   .profile {
-    background-color: pink;
     flex-direction: column;
+  }
+
+  .profile__title {
+    margin-right: 10px;
+    font-size: 22px;
+    line-height: 1.2;
   }
 
   .profile__info {
@@ -95,6 +100,8 @@
   .profile__description {
     width: 100%;
     text-align: center;
+    font-size: 14px;
+    line-height: 1.2;
   }
 
   .profile__add-button {
