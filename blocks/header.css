@@ -1,7 +1,8 @@
 .header {
-  margin-top: 45px;
+  margin: 45px auto 0 auto;
   padding-bottom: 37px;
   border-bottom: 1px solid rgba(84, 84, 84, 0.7);
+  width: 100%;
 }
 
 @media screen and (max-width: 480px) {

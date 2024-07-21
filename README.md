@@ -25,3 +25,6 @@ This project utilized intermediate and advanced HTML/CSS in order to build a res
 **Link to GitHub**
 
 https://github.com/mpaclebb/se_project_aroundtheus
+
+**Link to Video**
+https://drive.google.com/file/d/1CcNj1WSwkkrz_bBRJ-ITi_bGQzBhCvoj/view?usp=sharing
