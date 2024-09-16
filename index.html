@@ -35,7 +35,7 @@
           <button class="profile__add-button" type="button"></button>
         </section>
         <section class="cards page__section">
-          <ul class="Cards__list"></ul>
+          <ul class="cards__list"></ul>
         </section>
       </main>
       <footer class="footer page__section">
@@ -45,7 +45,7 @@
 
     <div class="modal" id="profile-edit-modal">
       <div class="modal__container">
-        <button class="modal__close" id="modal-close-button"></button>
+        <button class="modal__close"></button>
         <p class="modal__heading">Edit Profile</p>
         <form class="modal__form">
           <input
@@ -62,11 +62,41 @@
             id="profile-description-input"
             placeholder="Description"
           />
-          <button class="modal__button">Save</button>
+          <button class="modal__button" type="Submit">Save</button>
         </form>
       </div>
     </div>
-
+    <!-- Add Card Modal-->
+    <div class="modal" id="add-card-modal">
+      <div class="modal__container" id="card-image-container">
+        <button class="modal__close"></button>
+        <p class="modal__heading">New Place</p>
+        <form class="modal__form" id="add-card-form">
+          <input
+            type="text"
+            name="title"
+            class="modal__input modal__input_type_title"
+            placeholder="Title"
+          />
+          <input
+            type="text"
+            name="link"
+            class="modal__input modal__input_type_link"
+            placeholder="Image link"
+          />
+          <button class="modal__button" type="submit">Save</button>
+        </form>
+      </div>
+    </div>
+    <!--Card Image Modal-->
+    <div class="modal" id="card-image-modal">
+      <div class="modal__container">
+        <button class="modal__close"></button>
+        <img src="" alt="" class="modal__image" id="modal-image" />
+        <h2 class="modal__title" id="modal-title"></h2>
+      </div>
+    </div>
+    <!--Card Template-->
     <template id="card-template">
       <li class="card">
         <img class="card__image" src="" alt="" />
