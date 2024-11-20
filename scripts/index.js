@@ -69,6 +69,10 @@ function getCardElement(cardData) {
   likeButton.addEventListener("click", () => {
     likeButton.classList.toggle("card__like-button_active");
   });
+  const cardDeleteButton = cardElement.querySelector(".card__delete-button");
+  cardDeleteButton.addEventListener("click", () => {
+    cardElement.remove();
+  });
 
   cardImageEl.src = cardData.link;
   cardImageEl.alt = cardData.name;
@@ -121,7 +125,7 @@ profileEditForm.addEventListener("submit", handleProfileEditFormSubmit);
 addCardButton.addEventListener("click", () => openModal(addCardModal));
 
 addCardModalCloseButton.addEventListener("click", () =>
-  closeModal(addcardModal)
+  closeModal(addCardModal)
 );
 
 cardImageModalCloseButton.addEventListener("click", () =>
