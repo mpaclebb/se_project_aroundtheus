@@ -93,6 +93,20 @@ function renderCard(cardData, list) {
   list.prepend(cardElement);
 }
 
+function closeModalByOverlay(evt) {
+  if (evt.target === evt.currentTarget) {
+    closeModal(evt.currentTarget);
+  }
+}
+
+function closeModalByPressingESC(evt) {
+  console.log("Key pressed:", evt.key);
+  if (evt.key === "Escape" || evt.key === "esc" || evt.keyCode === 27) {
+    const modal = document.querySelector(".modal_opened");
+    closeModal(modal);
+  }
+}
+
 /* Event Handlers */
 function handleProfileEditFormSubmit(event) {
   event.preventDefault();
