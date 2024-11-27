@@ -54,15 +54,30 @@
             class="modal__input"
             id="profile-title-input"
             placeholder="Name"
+            minlength="2"
+            maxlength="40"
+            required
           />
+
+          <span class="modal__error" id="profile-bio-input-error"></span>
           <input
             type="text"
             name="bio"
             class="modal__input"
             id="profile-description-input"
             placeholder="Description"
+            minlength="2"
+            maxlength="400"
           />
-          <button class="modal__button" type="Submit">Save</button>
+
+          <span class="modal__error" id="profile-bio-input-error"></span>
+          <button
+            class="modal__button modal__button_disabled"
+            type="submit"
+            dissabled
+          >
+            save
+          </button>
         </form>
       </div>
     </div>
@@ -76,15 +91,26 @@
             type="text"
             name="title"
             class="modal__input modal__input_type_title"
+            id="add-card-title-input"
             placeholder="Title"
+            minlength="1"
+            maxlength="30"
+            required
           />
+          <span class="modal__error" id="add-card-title-input-error"></span>
           <input
             type="text"
             name="link"
             class="modal__input modal__input_type_link"
+            id="add-card-url-input"
             placeholder="Image link"
+            required
           />
           <button class="modal__button" type="submit">Save</button>
+          <span class="modal__error" id="add-card-url-input-error"></span>
+          <button class="modal__button modal__button_disabled" type="submit">
+            Save
+          </button>
         </form>
       </div>
     </div>
