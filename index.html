@@ -59,7 +59,7 @@
             required
           />
 
-          <span class="modal__error" id="profile-bio-input-error"></span>
+          <span class="modal__error" id="profile-title-input-error"></span>
           <input
             type="text"
             name="bio"
@@ -68,13 +68,17 @@
             placeholder="Description"
             minlength="2"
             maxlength="400"
+            required
           />
 
-          <span class="modal__error" id="profile-bio-input-error"></span>
+          <span
+            class="modal__error"
+            id="profile-description-input-error"
+          ></span>
           <button
             class="modal__button modal__button_disabled"
             type="submit"
-            dissabled
+            disabled
           >
             save
           </button>
@@ -98,15 +102,16 @@
             required
           />
           <span class="modal__error" id="add-card-title-input-error"></span>
+
+          <label class="modal__label"></label>
           <input
-            type="text"
+            type="url"
             name="link"
             class="modal__input modal__input_type_link"
             id="add-card-url-input"
             placeholder="Image link"
             required
           />
-          <button class="modal__button" type="submit">Save</button>
           <span class="modal__error" id="add-card-url-input-error"></span>
           <button class="modal__button modal__button_disabled" type="submit">
             Save
@@ -142,5 +147,6 @@
       </li>
     </template>
     <script src="./scripts/index.js"></script>
+    <script src="./scripts/validation.js"></script>
   </body>
 </html>
