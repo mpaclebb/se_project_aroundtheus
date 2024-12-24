@@ -133,10 +133,6 @@
   opacity: 0.2;
 }
 
-.modal__label {
-  position: relative;
-}
-
 #card-image-modal-container {
   background-color: transparent;
 }
