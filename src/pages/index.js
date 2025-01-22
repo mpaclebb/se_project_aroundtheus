@@ -71,48 +71,46 @@ addFormValidator.enableValidation();
 function createCard(data) {
   console.log("Card Data Passed to createCard:", data); // Debug log
 
-  const card = new Card(
-    {
-      data,
-      handleImageClick: () => {
-        imageModal.open(data);
-      },
-    },
-    cardSelectors.cardTemplate
-  );
+  const card = new Card(data, cardSelectors.cardTemplate, (data) => {
+    imageModal.open(data);
+  });
   return card.getView();
 }
 
 /* Event Handlers */
 
-function handleProfileEditFormSubmit(profiledata) {
+function handleProfileEditFormSubmit(profileData) {
   console.log("Profile Edit Form Submit");
-  profileTitle.textContent = profileTitleInput.value;
-  profileDescription.textContent = profileDescriptionInput.value;
+  const name = profileData.title;
+  const bio = profileData.description;
+  user.setUserInfor({ name, description });
+  editProfileModal.close();
 }
 
-function handleAddCardFormSubmit(event) {
-  event.preventDefault();
-  console.log("Add card Form Submit");
-  const name = cardTitleInput.value;
-  const link = cardLinkInput.value;
-  renderCard({ name, link }, cardListEl);
-  closeModal(addCardModal);
-  addFormValidator.disableButton();
-  event.target.reset();
+function handleAddCardFormSubmit(newCardData) {
+  console.log(newCardData);
+  const name = newCardData.title;
+  const alt = newCardData.title;
+  const link = newCardData.link;
+  section.addItem(createCard({ name, alt, link }));
+  newCardModal.close();
 }
 
 /* Event Listeners */
 profileEditButton.addEventListener("click", () => {
-  const userInput = user.getUserInfor();
-  profileTitleInput.value = profileTitle.textContent;
-  profileDescriptionInput.value = profileDescription.textContent;
-  openModal(profileEditModal);
+  const userInput = user.getUserInfo();
+  profileTitleInput.value = userInput.name;
+  profileDescriptionInput.value = userInput.bio;
+  editProfileModal.open();
+  editFormValidator.toggleButtonState();
 });
 
 // profileEditForm.addEventListener("submit", handleProfileEditFormSubmit);
 
-addCardButton.addEventListener("click", () => openModal(addCardModal));
+addCardButton.addEventListener("click", () => {
+  newCardModal.open();
+  addFormValidator.resetValidation();
+});
 
 // addCardForm.addEventListener("submit", handleAddCardFormSubmit);
 

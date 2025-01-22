@@ -46,6 +46,8 @@ export default class Card {
 
     this._likeButton = this._cardElement.querySelector(".card__like-button");
     this._cardImage = this._cardElement.querySelector(".card__image");
+    console.log("Card Name:", this.name); // Debugging
+    console.log("Card Link:", this.link); // Debugging
     this._deleteButton = this._cardElement.querySelector(
       ".card__delete-button"
     );
