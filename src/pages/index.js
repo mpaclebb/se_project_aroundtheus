@@ -82,8 +82,8 @@ function createCard(data) {
 function handleProfileEditFormSubmit(profileData) {
   console.log("Profile Edit Form Submit");
   const name = profileData.title;
-  const description = profileData.description;
-  user.setUserInfor({ name, description });
+  const description = profileData.bio;
+  user.setUserInfo({ name, description });
   editProfileModal.close();
 }
 
