@@ -49,7 +49,7 @@ const imageModal = new ModalWithImage(cardSelectors.previewModal);
 
 const user = new UserInfo({
   name: ".profile__title",
-  bio: ".profile__bio",
+  description: ".profile__description",
 });
 
 //initializie instances
@@ -82,7 +82,7 @@ function createCard(data) {
 function handleProfileEditFormSubmit(profileData) {
   console.log("Profile Edit Form Submit");
   const name = profileData.title;
-  const bio = profileData.description;
+  const description = profileData.description;
   user.setUserInfor({ name, description });
   editProfileModal.close();
 }
@@ -102,7 +102,7 @@ profileEditButton.addEventListener("click", () => {
   profileTitleInput.value = userInput.name;
   profileDescriptionInput.value = userInput.bio;
   editProfileModal.open();
-  editFormValidator.toggleButtonState();
+  //editFormValidator._toggleButtonState();
 });
 
 // profileEditForm.addEventListener("submit", handleProfileEditFormSubmit);
