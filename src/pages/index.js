@@ -71,8 +71,16 @@ addFormValidator.enableValidation();
 
 /* Functions */
 
-function createCard(cardData) {
-  const card = new Card(cardData, cardSelector, handleImageClick);
+function createCard(data) {
+  const card = new Card(
+    {
+      data,
+      handleImageClick: () => {
+        imageModal.open(data);
+      },
+    },
+    cardSelectors.cardTemplate
+  );
   return card.getView();
 }
 
