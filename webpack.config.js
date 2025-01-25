@@ -47,6 +47,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: "./src/vendor/index.html",
+      favicon: "./src/images/favicon.ico",
       filename: "index.html",
       inject: "body",
     }),
