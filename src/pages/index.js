@@ -92,6 +92,7 @@ function handleAddCardFormSubmit(newCardData) {
   const name = newCardData.title;
   const alt = newCardData.title;
   const link = newCardData.link;
+  addFormValidator.disableButton();
   section.addItem(createCard({ name, alt, link }));
   newCardModal.close();
 }
@@ -109,7 +110,6 @@ profileEditButton.addEventListener("click", () => {
 
 addCardButton.addEventListener("click", () => {
   newCardModal.open();
-  addFormValidator.resetValidation();
 });
 
 // addCardForm.addEventListener("submit", handleAddCardFormSubmit);
