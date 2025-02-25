@@ -21,6 +21,28 @@ import ModalWithForm from "../components/ModalWithForm.js";
 import ModalWithImage from "../components/ModalWithImage.js";
 import UserInfo from "../components/UserInfo.js";
 import Section from "../components/Section.js";
+import Api from "../components/Api.js";
+
+//API
+const api = new Api({
+  baseURL: "https://around-api.en.tripleten-services.com/v1",
+  authToken: "f2352e83-00f2-4fed-84a7-f485841f4242",});
+
+  api.getUserInfo().then((userData) =>
+  user.setUserInfo({
+    name: userData.name,
+    bio: userData.about,
+  }),
+);
+
+api
+  .getInitialCards()
+  .then((cards) => {
+    section.renderItems(cards);
+  })
+  .catch((err) => {
+    console.error(err);
+  });
 
 //instantiate
 const section = new Section(
@@ -35,10 +57,15 @@ const section = new Section(
   cardSelectors.cardListEl
 );
 
-const newCardModal = new ModalWithForm(
-  "#add-card-modal",
-  handleAddCardFormSubmit
-);
+const newCardModal = new ModalWithForm({
+ modalSelector: "#add-card-modal",
+  handleFormSubmit: (data) => {
+    api.addCard(data).then((data) => {
+      section.addItem(createCard(data));
+  });
+  },
+});
+
 
 const editProfileModal = new ModalWithForm(
   "#profile-edit-modal",
