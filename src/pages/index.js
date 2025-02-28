@@ -3,7 +3,6 @@ import "../pages/index.css";
 //imports
 
 import {
-  initialCards,
   cardSelectors,
   settings,
   profileEditButton,
@@ -12,6 +11,8 @@ import {
   profileEditForm,
   addCardButton,
   addCardForm,
+  changeAvatarButton,
+  changeAvatarForm,
 } from "../utils/constants.js";
 console.log("initial Cards:", initialCards);
 
@@ -26,23 +27,26 @@ import Api from "../components/Api.js";
 //API
 const api = new Api({
   baseURL: "https://around-api.en.tripleten-services.com/v1",
-  authToken: "f2352e83-00f2-4fed-84a7-f485841f4242",});
-
-  api.getUserInfo().then((userData) =>
-  user.setUserInfo({
-    name: userData.name,
-    bio: userData.about,
-  }),
-);
+  headers:{
+    authorization:"f2352e83-00f2-4fed-84a7-f485841f4242",
+"Content-Type": "application/json",
+  },
+});
 
 api
-  .getInitialCards()
-  .then((cards) => {
+  .getAppInfo()
+  .then(([userData, cards]) => {
+    user.setUserInfo({
+      name: userData.name,
+      bio: userData.about,
+    });
+    user,changeAvatarImage(userData.avatar);
     section.renderItems(cards);
   })
   .catch((err) => {
-    console.error(err);
+console.error('Failed to load app info: ${err}');
   });
+
 
 //instantiate
 const section = new Section(
@@ -60,17 +64,72 @@ const section = new Section(
 const newCardModal = new ModalWithForm({
  modalSelector: "#add-card-modal",
   handleFormSubmit: (data) => {
-    api.addCard(data).then((data) => {
-      section.addItem(createCard(data));
-  });
+   newCardModal.renderLoading(true);
+   api
+   .addCard({
+    name: data.title,
+    link: data.link,
+   })
+   .then((data) => {
+    section.addItem(createCard(data));
+    newCardModal.close();
+   })
+   .catch(console.error)
+   .finally(() => {
+    newCardModal.renderLoading(false);
+   });
   },
 });
 
 
-const editProfileModal = new ModalWithForm(
-  "#profile-edit-modal",
-  handleProfileEditFormSubmit
-); //test//
+
+const editProfileModal = new ModalWithForm({
+  modalSelector: "#profile-edit-modal",
+  handleFormSubmit: (data) => {
+
+  editProfileModal.renderLoading(true);
+  
+  api
+  .editProfile({
+    name: data.title,
+    about: data.bio,
+  })
+  .then((data) => {
+user.setUserInfo({name:data.name, bio: data.about});
+editProfileModal.close();
+  })
+  .catch(console.error)
+  .finally(() => {
+
+    editProfileModal.renderLoading(false);
+  });
+},
+});
+
+
+//test//
+
+const confirmDeleteModal = new ModadlWithForm({
+  modalSelector: "#confirm-delete-modal",
+  handleFormSubmit: confirmDeleteCard,
+});
+
+const changeAvatarModal = new ModalWithForm({
+  modalSelector: "#change-avatar-modal",
+  handleFormSubmit: (data) => {
+    changeAvatarModal.renderLoading(true);
+    api
+    .changeAvatar(data.link)
+    .then((userData) => {
+      user.changeAvatarImage(userData.avatar);
+      changeAvatarModal.close();
+    })
+    .catch(console.error)
+    .finally(() => {
+      changeAvatarModal.renderLoading(false);
+    });
+  },
+});
 
 const imageModal = new ModalWithImage(cardSelectors.previewModal);
 
