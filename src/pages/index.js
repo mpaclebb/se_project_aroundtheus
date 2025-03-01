@@ -155,14 +155,23 @@ function createCard(data) {
   const card = new Card(
     {
       data: {},
-      handleImageClick: (card) => {
+      handleImageClick: () => {
         imageModal.open(data);
       },
+      handleLikeClick: (card) => {
+        api
+          .likeCardStatus(card.getId(), !card._isLiked)
+          .then((data) => {
+            card.handleLike(data.isLiked);
+          })
+          .catch(console.error);
+      },
+      handleDeleteCardClick: confirmDeleteCard,
       //handle card click
       //handle like click
       //handle delete icon click
     },
-    cardSelectors.cardTemplate
+    cardSelectors.cardTemplate,
   );
 
   return card.getView();
