@@ -39,7 +39,7 @@ api
       name: userData.name,
       description: userData.about,
     });
-    user.ChangeAvatarImage(userData.avatar);
+    user.changeAvatarImage(userData.avatar);
     section.renderItems(cards);
   })
   .catch((err) => {
@@ -146,6 +146,7 @@ const addFormValidator = new FormValidator(settings, addCardForm);
 
 editFormValidator.enableValidation();
 addFormValidator.enableValidation();
+changeAvatarFormValidator.enableValidation();
 
 /* Functions */
 
@@ -177,25 +178,20 @@ function createCard(data) {
   return card.getView();
 }
 
-/* Event Handlers */
-
-function handleProfileEditFormSubmit(profileData) {
-  console.log("Profile Edit Form Submit");
-  const name = profileData.title;
-  const description = profileData.bio;
-  user.setUserInfo({ name, description });
-  editProfileModal.close();
+function confirmDeleteCard(cardData) {
+  confirmDeleteModal.open();
+  confirmDeleteModal.setSubmitHandler(() => {
+    api
+      .deleteCard(cardData.getId())
+      .then(() => {
+        cardData.handleDeleteCard();
+        confirmDeleteModal.close();
+      })
+      .catch(console.error);
+  });
 }
 
-function handleAddCardFormSubmit(newCardData) {
-  console.log(newCardData);
-  const name = newCardData.title;
-  const alt = newCardData.title;
-  const link = newCardData.link;
-  addFormValidator.disableButton();
-  section.addItem(createCard({ name, alt, link }));
-  newCardModal.close();
-}
+
 
 /* Event Listeners */
 profileEditButton.addEventListener("click", () => {
