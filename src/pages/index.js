@@ -14,7 +14,6 @@ import {
   changeAvatarButton,
   changeAvatarForm,
 } from "../utils/constants.js";
-console.log("initial Cards:", initialCards);
 
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
@@ -27,9 +26,9 @@ import Api from "../components/Api.js";
 //API
 const api = new Api({
   baseURL: "https://around-api.en.tripleten-services.com/v1",
-  headers:{
-    authorization:"f2352e83-00f2-4fed-84a7-f485841f4242",
-"Content-Type": "application/json",
+  headers: {
+    authorization: "f2352e83-00f2-4fed-84a7-f485841f4242",
+    "Content-Type": "application/json",
   },
 });
 
@@ -40,18 +39,16 @@ api
       name: userData.name,
       bio: userData.about,
     });
-    user,changeAvatarImage(userData.avatar);
+    user.ChangeAvatarImage(userData.avatar);
     section.renderItems(cards);
   })
   .catch((err) => {
-console.error('Failed to load app info: ${err}');
+    console.error("Failed to load app info: ${err}");
   });
-
 
 //instantiate
 const section = new Section(
   {
-    items: initialCards,
     renderer: (data) => {
       console.log("Rendering card with data:", data);
       section.addItem(createCard(data));
@@ -62,72 +59,67 @@ const section = new Section(
 );
 
 const newCardModal = new ModalWithForm({
- modalSelector: "#add-card-modal",
+  modalSelector: "#add-card-modal",
   handleFormSubmit: (data) => {
-   newCardModal.renderLoading(true);
-   api
-   .addCard({
-    name: data.title,
-    link: data.link,
-   })
-   .then((data) => {
-    section.addItem(createCard(data));
-    newCardModal.close();
-   })
-   .catch(console.error)
-   .finally(() => {
-    newCardModal.renderLoading(false);
-   });
+    newCardModal.renderLoading(true);
+    api
+      .addCard({
+        name: data.title,
+        link: data.link,
+      })
+      .then((data) => {
+        section.addItem(createCard(data));
+        newCardModal.close();
+      })
+      .catch(console.error)
+      .finally(() => {
+        newCardModal.renderLoading(false);
+      });
   },
 });
-
-
 
 const editProfileModal = new ModalWithForm({
   modalSelector: "#profile-edit-modal",
   handleFormSubmit: (data) => {
+    editProfileModal.renderLoading(true);
 
-  editProfileModal.renderLoading(true);
-  
-  api
-  .editProfile({
-    name: data.title,
-    about: data.bio,
-  })
-  .then((data) => {
-user.setUserInfo({name:data.name, bio: data.about});
-editProfileModal.close();
-  })
-  .catch(console.error)
-  .finally(() => {
-
-    editProfileModal.renderLoading(false);
-  });
-},
+    api
+      .editProfile({
+        name: data.title,
+        about: data.bio,
+      })
+      .then((data) => {
+        user.setUserInfo({ name: data.name, bio: data.about });
+        editProfileModal.close();
+      })
+      .catch(console.error)
+      .finally(() => {
+        editProfileModal.renderLoading(false);
+      });
+  },
 });
-
 
 //test//
 
-const confirmDeleteModal = new ModadlWithForm({
-  modalSelector: "#confirm-delete-modal",
-  handleFormSubmit: confirmDeleteCard,
-});
+// const confirmDeleteModal = new ModalWithForm({
+//   modalSelector: "#confirm-delete-modal",
+//   handleFormSubmit: confirmDeleteCard,
+// });
 
 const changeAvatarModal = new ModalWithForm({
   modalSelector: "#change-avatar-modal",
   handleFormSubmit: (data) => {
     changeAvatarModal.renderLoading(true);
     api
-    .changeAvatar(data.link)
-    .then((userData) => {
-      user.changeAvatarImage(userData.avatar);
-      changeAvatarModal.close();
-    })
-    .catch(console.error)
-    .finally(() => {
-      changeAvatarModal.renderLoading(false);
-    });
+      .changeAvatar(data.link)
+      .then((userData) => {
+        user.changeAvatarImage(userData.avatar);
+        changeAvatarModal.close();
+      })
+      .catch(console.error)
+      .finally(() => {
+        changeAvatarModal.renderLoading(false);
+      });
   },
 });
 
@@ -136,19 +128,22 @@ const imageModal = new ModalWithImage(cardSelectors.previewModal);
 const user = new UserInfo({
   name: ".profile__title",
   description: ".profile__description",
+  avatar:".profile__avatar",
 });
 
 //initializie instances
-console.log("Initial Cards before rendering", initialCards);
-section.renderItems(initialCards);
+// console.log("Initial Cards before rendering", initialCards);
+//  section.renderItems(cards);
 imageModal.setEventListeners();
 newCardModal.setEventListeners();
 editProfileModal.setEventListeners();
+
 
 /*Validation*/
 
 const editFormValidator = new FormValidator(settings, profileEditForm);
 const addFormValidator = new FormValidator(settings, addCardForm);
+
 editFormValidator.enableValidation();
 addFormValidator.enableValidation();
 
@@ -157,9 +152,19 @@ addFormValidator.enableValidation();
 function createCard(data) {
   console.log("Card Data Passed to createCard:", data); // Debug log
 
-  const card = new Card(data, cardSelectors.cardTemplate, (data) => {
-    imageModal.open(data);
-  });
+  const card = new Card(
+    {
+      data: {},
+      handleImageClick: (card) => {
+        imageModal.open(data);
+      },
+      //handle card click
+      //handle like click
+      //handle delete icon click
+    },
+    cardSelectors.cardTemplate
+  );
+
   return card.getView();
 }
 

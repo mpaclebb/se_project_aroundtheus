@@ -50,3 +50,8 @@ export const profileDescriptionInput = document.querySelector(
 export const profileEditForm = document.forms["profile-edit-form"];
 export const addCardButton = document.querySelector(".profile__add-button");
 export const addCardForm = document.forms["add-card-form"];
+export const changeAvatarButton =
+document.querySelector(".profile__avatar-edit-button",);
+export const changeAvatarForm = 
+document.forms["change-avatar-form"];
+
