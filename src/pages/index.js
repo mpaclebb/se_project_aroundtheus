@@ -37,7 +37,7 @@ api
   .then(([userData, cards]) => {
     user.setUserInfo({
       name: userData.name,
-      bio: userData.about,
+      description: userData.about,
     });
     user.ChangeAvatarImage(userData.avatar);
     section.renderItems(cards);
@@ -86,10 +86,10 @@ const editProfileModal = new ModalWithForm({
     api
       .editProfile({
         name: data.title,
-        about: data.bio,
+        about: data.description,
       })
       .then((data) => {
-        user.setUserInfo({ name: data.name, bio: data.about });
+        user.setUserInfo({ name: data.name, description: data.about });
         editProfileModal.close();
       })
       .catch(console.error)
@@ -128,7 +128,7 @@ const imageModal = new ModalWithImage(cardSelectors.previewModal);
 const user = new UserInfo({
   name: ".profile__title",
   description: ".profile__description",
-  avatar:".profile__avatar",
+  avatar:".profile__image",
 });
 
 //initializie instances
@@ -154,7 +154,7 @@ function createCard(data) {
 
   const card = new Card(
     {
-      data: {},
+      data,
       handleImageClick: () => {
         imageModal.open(data);
       },
