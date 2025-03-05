@@ -8,8 +8,7 @@ export default class ModalWithForm extends Modal {
     this._inputList = [...this._modalForm.querySelectorAll(".modal__input")];
 
   this._saveButton = this._modalForm.querySelector(".modal__button");
-  this._modalForm.querySelector(".modal__button");
-  this._saveButtonText = this._saveButton.textcontent;}
+  this._saveButtonText = this._saveButton.textContent;}
 
   setSubmitHandler(handleFormSubmit) {
     this._handleFormSubmit = handleFormSubmit;

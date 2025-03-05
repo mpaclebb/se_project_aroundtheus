@@ -99,6 +99,11 @@ const editProfileModal = new ModalWithForm({
   },
 });
 
+const confirmDeleteModal = new ModalWithForm({
+  modalSelector: "#confirm-delete-modal",
+  handleFormSubmit: confirmDeleteCard,
+});
+
 //test//
 
 // const confirmDeleteModal = new ModalWithForm({
@@ -137,12 +142,14 @@ const user = new UserInfo({
 imageModal.setEventListeners();
 newCardModal.setEventListeners();
 editProfileModal.setEventListeners();
+confirmDeleteModal.setEventListeners();
 
 
 /*Validation*/
 
 const editFormValidator = new FormValidator(settings, profileEditForm);
 const addFormValidator = new FormValidator(settings, addCardForm);
+const changeAvatarFormValidator = new FormValidator(settings, changeAvatarForm);
 
 editFormValidator.enableValidation();
 addFormValidator.enableValidation();
@@ -199,6 +206,7 @@ profileEditButton.addEventListener("click", () => {
   profileTitleInput.value = userInput.name;
   profileDescriptionInput.value = userInput.bio;
   editProfileModal.open();
+  editFormValidator.resetValidation();
   //editFormValidator._toggleButtonState();
 });
 
@@ -206,8 +214,14 @@ profileEditButton.addEventListener("click", () => {
 
 addCardButton.addEventListener("click", () => {
   newCardModal.open();
+  addFormValidator.resetValidation();
 });
 
+changeAvatarButton.addEventListener("click", () => {
+  changeAvatarModal.open();
+
+  changeAvatarFormValidator.resetValidation();
+});
 // addCardForm.addEventListener("submit", handleAddCardFormSubmit);
 
 // initialCards.forEach((cardData) => renderCard(cardData, cardListEl));
