@@ -189,7 +189,7 @@ function confirmDeleteCard(cardData) {
   confirmDeleteModal.open();
   confirmDeleteModal.setSubmitHandler(() => {
     api
-      .deleteCard(cardData.getId())
+      .deleteCard(cardData.getID())
       .then(() => {
         cardData.handleDeleteCard();
         confirmDeleteModal.close();
