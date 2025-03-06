@@ -143,7 +143,7 @@ imageModal.setEventListeners();
 newCardModal.setEventListeners();
 editProfileModal.setEventListeners();
 confirmDeleteModal.setEventListeners();
-
+changeAvatarModal.setEventListeners();
 
 /*Validation*/
 
