@@ -86,7 +86,7 @@ const editProfileModal = new ModalWithForm({
     api
       .editProfile({
         name: data.title,
-        about: data.description,
+        about: data.bio,
       })
       .then((data) => {
         user.setUserInfo({ name: data.name, description: data.about });
@@ -168,7 +168,7 @@ function createCard(data) {
       },
       handleLikeClick: (card) => {
         api
-          .likeCardStatus(card.getId(), !card._isLiked)
+          .likeCardStatus(card.getID(), !card._isLiked)
           .then((data) => {
             card.handleLike(data.isLiked);
           })
