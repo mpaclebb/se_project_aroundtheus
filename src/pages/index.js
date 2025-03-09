@@ -133,7 +133,7 @@ const imageModal = new ModalWithImage(cardSelectors.previewModal);
 const user = new UserInfo({
   name: ".profile__title",
   description: ".profile__description",
-  avatar:".profile__image",
+  avatar: ".profile__image",
 });
 
 //initializie instances
@@ -179,7 +179,7 @@ function createCard(data) {
       //handle like click
       //handle delete icon click
     },
-    cardSelectors.cardTemplate,
+    cardSelectors.cardTemplate
   );
 
   return card.getView();
@@ -197,8 +197,6 @@ function confirmDeleteCard(cardData) {
       .catch(console.error);
   });
 }
-
-
 
 /* Event Listeners */
 profileEditButton.addEventListener("click", () => {

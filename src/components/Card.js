@@ -1,5 +1,8 @@
 export default class Card {
-  constructor({data, handleImageClick, handleLikeClick, handleDeleteCardClick}, cardSelector) {
+  constructor(
+    { data, handleImageClick, handleLikeClick, handleDeleteCardClick },
+    cardSelector
+  ) {
     this.name = data.name;
     this.link = data.link;
     this._id = data._id;
@@ -10,7 +13,7 @@ export default class Card {
     this._handleDeleteCard = handleDeleteCardClick;
   }
 
-  getID(){
+  getID() {
     return this._id;
   }
 
@@ -34,13 +37,12 @@ export default class Card {
   }
   _handleLikeIcon() {
     if (this._isLiked) {
-
       this._likeButton.classList.add("card__like-button_active");
-    }else {
+    } else {
       this._likeButton.classList.remove("card__like-button_active");
     }
   }
-  
+
   handleLike(isLiked) {
     this._isLiked = isLiked;
     this._handleLikeIcon();

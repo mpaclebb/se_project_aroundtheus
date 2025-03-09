@@ -6,7 +6,7 @@ export default class UserInfo {
   }
 
   changeAvatarImage(avatar) {
-this._avatar.src= avatar;
+    this._avatar.src = avatar;
   }
 
   getUserInfo() {
