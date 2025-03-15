@@ -96,6 +96,15 @@
   transition: opacity 0.3s;
 }
 
+.modal__error_avatar{
+  color: #ff0000;
+  font-size: 12px;
+  line-height: 8;
+  left: 36px;
+  position: absolute;
+  transition: opacity 0.3s;
+}
+
 .modal__error:first-of-type {
   bottom: calc(50%);
 }
